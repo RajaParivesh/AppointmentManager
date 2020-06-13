@@ -1,21 +1,15 @@
-import {Controller, Param, Body, Get, Post, Put, Delete} from "routing-controllers";
+import {Param, Body, Get, Post, Put, Delete, JsonController, QueryParam} from "routing-controllers";
 
-@Controller()
+@JsonController()
 export class UserController {
 
-    @Get("/users")
-    getAll() {
-        return "This action returns all users";
+    @Get("/users/exist")
+    getUsers(@QueryParam("limit") limit: number) {
     }
 
-    @Get("/users/:id")
-    getOne(@Param("id") id: number) {
-        return "This action returns user #" + id;
-    }
-
-    @Post("/users")
-    post(@Body() user: any) {
-        return "Saving user...";
+    @Post("/user/register")
+    post(@Body() user:{email:any, name:any, password:any }) {
+        return user;
     }
 
     @Put("/users/:id")
@@ -27,5 +21,4 @@ export class UserController {
     remove(@Param("id") id: number) {
         return "Removing user...";
     }
-
 }
