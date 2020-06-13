@@ -1,14 +1,26 @@
 import React from 'react';
 import '../../assets/styles/App.css';
-import Login from "../Login/Login";
+import { Button } from '@material-ui/core';
+import Toolbar from "@material-ui/core/Toolbar";
+import AppBar from "@material-ui/core/AppBar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
 
 function Home() {
     return (
-        <div className="App">
-            <header className="App-header">
-                Home
-            </header>
-        </div>
+     <div>
+         <AppBar position="static">
+             <Toolbar>
+                 <IconButton edge="start" color="inherit" aria-label="menu">
+                     {/*<MenuIcon />*/}
+                 </IconButton>
+                 <Typography variant="h6" >
+                     News
+                 </Typography>
+                 <Button color="inherit">Login</Button>
+             </Toolbar>
+         </AppBar>
+     </div>
     );
 }
 

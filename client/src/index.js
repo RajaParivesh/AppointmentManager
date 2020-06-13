@@ -10,12 +10,12 @@ import MyBookedSlot from "./components/MyBookedSlot/MyBookedSlot";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home/>
-    <Login/>
+    {/*<Home/>*/}
+    {/*<Login/>*/}
     <SignUp/>
-    <Availability/>
-    <BookOthersTime/>
-    <MyBookedSlot/>
+    {/*<Availability/>*/}
+    {/*<BookOthersTime/>*/}
+    {/*<MyBookedSlot/>*/}
   </React.StrictMode>,
   document.getElementById('root')
 );

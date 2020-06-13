@@ -1,6 +1,5 @@
 import React from 'react';
 import '../../assets/styles/App.css';
-import Login from "../Login/Login";
 
 function Availability() {
     return (

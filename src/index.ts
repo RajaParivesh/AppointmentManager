@@ -32,7 +32,7 @@ createConnection({
     useExpressServer(app,{
         routePrefix: "/api",
         authorizationChecker: (action: Action) => AuthenticationMiddleware.authorize(action),
-        controllers: [UserController]
+        controllers: [UserController,SlotController]
     });
     app.use('/', express.static('client/build'));
     app.listen(port)
