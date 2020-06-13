@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn, Timestamp} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn, Timestamp} from "typeorm";
+import {SlotStatus} from "./SlotStatus";
 
 @Entity()
 export class Slots {
@@ -14,4 +15,8 @@ export class Slots {
 
     @Column()
     user_id: number;
+
+
+    @OneToMany(type => SlotStatus, slotStatus => slotStatus.slotId)
+    slotStatus: SlotStatus[]
 }

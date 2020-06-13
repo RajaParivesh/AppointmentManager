@@ -1,7 +1,12 @@
-import {Param, Body, Get, Post, Put, Delete, JsonController, QueryParam} from "routing-controllers";
+import {Body, Get, Post, JsonController, QueryParam, NotFoundError} from "routing-controllers";
 import {User} from "../Entity/User";
 import {getConnectionManager, Repository} from "typeorm";
-import {EntityFromBody, EntityFromParam} from "typeorm-routing-controllers-extensions";
+import {EntityFromBody} from "typeorm-routing-controllers-extensions";
+import {LoginRequest} from "../Types/LoginRequest";
+import {Authorization} from "../Utils/Authorization";
+import * as crypto from "crypto";
+
+const passwordSalt: string = "anotherRandomString";
 
 @JsonController()
 export class UserController {
@@ -22,14 +27,28 @@ export class UserController {
     // user registration
     @Post("/users")
     post(@EntityFromBody() user: User ){
-        return this.userRepository.save(user);
+    user.password = UserController.generateHash(user.password);
+         return this.userRepository.save(user);
+    }
+    private static generateHash(string: string) {
+        // @ts-ignore
+        return crypto.createHash('sha256', passwordSalt)
+            .update(string)
+            .digest('base64');
     }
 
     // user login
     @Post("/users/login")
-    async getOne(@Body() body:object  ) {
-        // @ts-ignore
-        const count : number  = await  this.userRepository.count({email:body.email, password: body.password});
-        return count == 1;
+    async login(@Body({validate: true}) loginRequest: LoginRequest) {
+
+        const queryParams = {
+            email: loginRequest.email,
+            password: UserController.generateHash(loginRequest.password)
+        }
+        const users =  await this.userRepository.find(queryParams);
+
+        if (users.length == 0) throw new NotFoundError();
+
+        return Authorization.sign({user: users[0]});
     }
 }

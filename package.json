@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/RajaParivesh/EventManager#readme",
   "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.0.13",
     "jest": "^26.0.1",
     "nodemon": "^2.0.4",
@@ -36,6 +37,8 @@
   "dependencies": {
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
+    "crypto": "^1.0.1",
+    "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
     "routing-controllers": "^0.9.0-alpha.3",

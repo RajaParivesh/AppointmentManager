@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Slots} from "./Slots";
 
 @Entity()
 export class SlotStatus {
@@ -7,7 +8,7 @@ export class SlotStatus {
     id: number;
 
     @Column()
-    slot_id:number;
+    slotId:number;
 
     @Column()
     status_id: number;
@@ -17,4 +18,8 @@ export class SlotStatus {
 
     @Column()
     timestamp: number;
+
+
+    @ManyToOne(type => Slots, slot => slot.id)
+    slot: Slots;
 }
