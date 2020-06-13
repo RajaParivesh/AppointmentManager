@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/RajaParivesh/EventManager#readme",
   "devDependencies": {
+    "@types/express": "^4.17.6",
     "@types/jsonwebtoken": "^8.5.0",
     "@types/node": "^14.0.13",
     "jest": "^26.0.1",
@@ -38,6 +39,7 @@
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "crypto": "^1.0.1",
+    "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
