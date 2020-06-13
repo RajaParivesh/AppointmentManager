@@ -1,14 +1,14 @@
 import React from 'react';
 import '../../assets/styles/App.css';
 
-function App() {
+function Login() {
   return (
     <div className="App">
       <header className="App-header">
-          Learn React
+          Login
       </header>
     </div>
   );
 }
 
-export default App;
+export default Login;
