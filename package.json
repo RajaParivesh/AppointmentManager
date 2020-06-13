@@ -2,7 +2,7 @@
   "name": "event-manager",
   "version": "1.0.0",
   "description": "Navigus Online Assignment",
-  "main": "dist/server.js",
+  "main": "src/index.ts",
   "scripts": {
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts --inspect",
@@ -36,7 +36,11 @@
   "dependencies": {
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
+    "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
-    "routing-controllers": "^0.9.0-alpha.3"
+    "routing-controllers": "^0.9.0-alpha.3",
+    "typedi": "^0.8.0",
+    "typeorm": "^0.2.25",
+    "typeorm-routing-controllers-extensions": "^0.2.0"
   }
 }

@@ -6,6 +6,7 @@
     "lib": ["ESNext"],
     "strict": true,
     "declaration": true,
+    "emitDecoratorMetadata": true,
     "outDir": "dist",
     "sourceMap": true,
     "alwaysStrict": true,

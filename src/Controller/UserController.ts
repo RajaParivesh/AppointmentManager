@@ -1,24 +1,35 @@
 import {Param, Body, Get, Post, Put, Delete, JsonController, QueryParam} from "routing-controllers";
+import {User} from "../Entity/User";
+import {getConnectionManager, Repository} from "typeorm";
+import {EntityFromBody, EntityFromParam} from "typeorm-routing-controllers-extensions";
 
 @JsonController()
 export class UserController {
 
+    private userRepository: Repository<User>;
+
+    constructor() {
+        this.userRepository = getConnectionManager().get().getRepository(User);
+    }
+
+    // check user exist
     @Get("/users/exist")
-    getUsers(@QueryParam("limit") limit: number) {
+    async getUsers(@QueryParam("email_id") emailId: string) {
+        const count : number = await this.userRepository.count({ email: emailId});
+        return count == 1;
     }
 
-    @Post("/user/register")
-    post(@Body() user:{email:any, name:any, password:any }) {
-        return user;
+    // user registration
+    @Post("/users")
+    post(@EntityFromBody() user: User ){
+        return this.userRepository.save(user);
     }
 
-    @Put("/users/:id")
-    put(@Param("id") id: number, @Body() user: any) {
-        return "Updating a user...";
-    }
-
-    @Delete("/users/:id")
-    remove(@Param("id") id: number) {
-        return "Removing user...";
+    // user login
+    @Post("/users/login")
+    async getOne(@Body() body:object  ) {
+        // @ts-ignore
+        const count : number  = await  this.userRepository.count({email:body.email, password: body.password});
+        return count == 1;
     }
 }

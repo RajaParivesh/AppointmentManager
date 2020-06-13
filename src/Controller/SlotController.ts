@@ -1,31 +1,40 @@
-import {Controller, Param, Body, Get, Post, Put, Delete} from "routing-controllers";
+import {Param, Body, Get, Post, Put, Delete, JsonController, QueryParam, Patch} from "routing-controllers";
+import {Slots} from "../Entity/Slots";
+import {getConnectionManager, Repository} from "typeorm";
+import {EntityFromBody, EntityFromParam} from "typeorm-routing-controllers-extensions";
 
-@Controller()
+
+@JsonController()
 export class SlotController {
 
-    @Get("/slots")
-    getAll() {
-        return "This action returns all slots";
+    private slotsRepository: Repository<Slots>;
+
+    constructor() {
+        this.slotsRepository = getConnectionManager().get().getRepository(Slots);
     }
 
-    @Get("/slots/:id")
-    getOne(@Param("id") id: number) {
-        return "This action returns slots #" + id;
-    }
-
+    // create slots
     @Post("/slots")
-    post(@Body() slot: any) {
-        return "Saving slot...";
+    post(@EntityFromBody() slots: Slots ){
+        return this.slotsRepository.save(slots);
     }
 
-    @Put("/slots/:id")
-    put(@Param("id") id: number, @Body() user: any) {
-        return "Updating a slot...";
+    // Get all slots of a given user_id
+    @Get("/slots/:user_id")
+    getSlots(@Param("user_id") user_id: number){
+        return this.slotsRepository.find({user_id:user_id});
     }
 
-    @Delete("/slots/:id")
-    remove(@Param("id") id: number) {
-        return "Removing slot...";
-    }
+    // Modify the slots
+    @Patch("/slots/:id")
+    async modifySlot(@Param("id") id:number, @EntityFromBody() slots: Slots ){
+        const slot : Slots | undefined  = await this.slotsRepository.findOne({id:id});
+        if (slot === undefined) return false;
 
+        slot.start_date_time = slots.start_date_time;
+        slot.end_date_time = slots.end_date_time;
+
+        return this.slotsRepository.save(slot);
+    }
 }
+
