@@ -62,14 +62,11 @@ export default function Home() {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography variant="h5" component="h2">
-                                       Quotes:
+                                       A goal without a plan is just a wish
                                     </Typography>
                                     <br/>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                        Start Date Time : 24/05/2020 12:45
-                                    </Typography>
-                                    <Typography className={classes.pos} color="textSecondary">
-                                        End Date Time : 25/05/2020 12:45
+                                       There are some people who live in a dream world, and there are some who face reality and then there are those who turn one into the other.
                                     </Typography>
                                 </CardContent>
                             </Card>
