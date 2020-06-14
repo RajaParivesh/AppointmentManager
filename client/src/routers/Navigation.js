@@ -29,10 +29,10 @@ class Navigation extends Component {
                     <Router path="/availability">
                         <Availability/>
                     </Router>
-                    <Router path="/book-others-time">
+                    <Router path="/book">
                         <BookOthersTime/>
                     </Router>
-                    <Router path="/my-booked-slot">
+                    <Router path="/appointments">
                         <MyBookedSlot/>
                     </Router>
                     <Route path="/">

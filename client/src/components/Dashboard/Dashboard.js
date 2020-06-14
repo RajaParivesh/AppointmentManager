@@ -96,7 +96,7 @@ export default function Dashboard() {
                             </Link>
                         </Grid>
                         <Grid item md={12} md={4}>
-                            <Link to="/book-others-time">
+                            <Link to="/book">
                                 <Button
                                     type="submit"
                                     fullWidth
@@ -109,7 +109,7 @@ export default function Dashboard() {
                             </Link>
                          </Grid>
                          <Grid item md={12} md={4}>
-                            <Link to="/my-booked-slot">
+                            <Link to="/appointments">
                                 <Button
                                     type="submit"
                                     fullWidth

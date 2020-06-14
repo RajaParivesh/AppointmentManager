@@ -49,7 +49,7 @@ createConnection({
         controllers: [UserController,SlotController],
         // defaultErrorHandler: false
     });
-    app.use('/', express.static('client/build'));
+    app.use(['/login', '/dashboard', '/register', '/availability', '/appointments', '/book', '/'], express.static('client/build'));
     app.listen(port)
     console.log(`Server is up and running on port ${port}. Now send requests to check if everything works.`);
 
