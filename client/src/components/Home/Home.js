@@ -1,47 +1,15 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    useRouteMatch,
-    useParams
+    Link
 } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import DialogActions from "@material-ui/core/DialogActions";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://www.linkedin.com/in/raja-parivesh/">
-                Raja Parivesh
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
-
-
-
-
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -87,7 +55,7 @@ export default function Home() {
                     Welcome to the Event Management Website
                 </Typography>
                 <br/>
-                {/*----------------*/}
+
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item md={12} md={12}>
@@ -134,21 +102,14 @@ export default function Home() {
                                 </Button>
                             </Link>
 
-
-                            {/*<Link to="/signup" className="btn btn-primary">Sign up</Link>*/}
-
-
-
                         </Grid>
                     </Grid>
 
                 </form>
-                {/*-------------------------------*/}
+
 
             </div>
-            <Box mt={5}>
-                <Copyright />
-            </Box>
+
         </Container>
     );
 }

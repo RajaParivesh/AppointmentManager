@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -19,20 +18,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import InputBase from "@material-ui/core/InputBase";
 import {fade} from "@material-ui/core";
 import SearchIcon from '@material-ui/icons/Search';
-
-
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://www.linkedin.com/in/raja-parivesh/">
-                Raja Parivesh
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+import Copyright from "../Copyright/Copyright";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -122,10 +108,10 @@ export default function BookOthersTime() {
                         inputProps={{ 'aria-label': 'search' }}
                     />
                 </div>
-                {/*----------------*/}
+
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
-                        <Grid item md={12} md={9}>
+                        <Grid item md={9}>
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography variant="h5" component="h2">
@@ -193,7 +179,7 @@ export default function BookOthersTime() {
 
                             </Card>
                         </Grid>
-                        <Grid item md={12} md={3}>
+                        <Grid item md={3}>
                             <Button
                                 type="submit"
                                 fullWidth
@@ -216,11 +202,6 @@ export default function BookOthersTime() {
                     </Grid>
 
                 </form>
-                {/*-------------------------------*/}
-
-
-                {/*-------------------------------*/}
-
 
             </div>
             <Box mt={5}>

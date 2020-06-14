@@ -2,7 +2,6 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -16,19 +15,8 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
+import Copyright from "../Copyright/Copyright";
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://www.linkedin.com/in/raja-parivesh/">
-                Raja Parivesh
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -72,7 +60,7 @@ export default function Availability() {
                 <Typography component="h1" variant="h5">
                     Available Slots
                 </Typography>
-{/*----------------*/}
+
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item md={12} md={9}>
@@ -166,7 +154,6 @@ export default function Availability() {
                     </Grid>
 
                 </form>
-{/*-------------------------------*/}
 
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
@@ -261,7 +248,6 @@ export default function Availability() {
                     </Grid>
 
                 </form>
-                {/*-------------------------------*/}
 
 
             </div>

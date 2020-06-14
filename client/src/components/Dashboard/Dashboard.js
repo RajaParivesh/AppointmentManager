@@ -6,9 +6,7 @@ import {
     BrowserRouter as Router,
     Switch,
     Route,
-    Link,
-    useRouteMatch,
-    useParams
+    Link
 } from "react-router-dom";
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -17,32 +15,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import DialogActions from "@material-ui/core/DialogActions";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://www.linkedin.com/in/raja-parivesh/">
-                Raja Parivesh
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
-
-
-
-
-
-
-
+import Copyright from "../Copyright/Copyright";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -87,7 +61,7 @@ export default function Dashboard() {
                     Welcome to the DashBoard
                 </Typography>
                 <br/>
-                {/*----------------*/}
+
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
                         <Grid item md={12} md={12}>
@@ -150,7 +124,6 @@ export default function Dashboard() {
                     </Grid>
 
                 </form>
-                {/*-------------------------------*/}
 
             </div>
             <Box mt={5}>
