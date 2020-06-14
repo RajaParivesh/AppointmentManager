@@ -51,10 +51,6 @@ export default function Home() {
         <Container component="main" maxWidth="sm" >
             <CssBaseline />
             <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    Welcome to the Event Management Website
-                </Typography>
-                <br/>
 
                 <form className={classes.form} noValidate>
                     <Grid container spacing={2}>
@@ -62,18 +58,21 @@ export default function Home() {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography variant="h5" component="h2">
-                                       A goal without a plan is just a wish
+                                        <center> A goal without a plan is just a wish </center>
                                     </Typography>
                                     <br/>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                       There are some people who live in a dream world, and there are some who face reality and then there are those who turn one into the other.
+                                        <center>There are some people who live in a dream world, and there are some who face the reality and then there are those who turn one into the other.</center>
                                     </Typography>
                                 </CardContent>
                             </Card>
                         </Grid>
 
+                        <Grid item md={12}>
+                            <sub>Give us the opportunity to plan all your goals.  Try our brand new appointment management system </sub>
+                        </Grid>
 
-                        <Grid item md={12} md={6}>
+                        <Grid item md={6}>
                             <Link to="/login">
                                 <Button
                                     type="submit"

@@ -1,4 +1,4 @@
-import {Body, Get, Post, JsonController, QueryParam, NotFoundError} from "routing-controllers";
+import {Body, Get, Post, JsonController, QueryParam, NotFoundError, ForbiddenError} from "routing-controllers";
 import {User} from "../Entity/User";
 import {getConnectionManager, Repository} from "typeorm";
 import {EntityFromBody} from "typeorm-routing-controllers-extensions";
@@ -20,16 +20,17 @@ export class UserController {
     // check user exist
     @Get("/users/exist")
     async getUsers(@QueryParam("email_id") emailId: string) {
-        const count : number = await this.userRepository.count({ email: emailId});
+        const count: number = await this.userRepository.count({email: emailId});
         return count == 1;
     }
 
     // user registration
     @Post("/users")
-    post(@EntityFromBody() user: User ){
-    user.password = UserController.generateHash(user.password);
-         return this.userRepository.save(user);
+    post(@EntityFromBody() user: User) {
+        user.password = UserController.generateHash(user.password);
+        return this.userRepository.save(user);
     }
+
     private static generateHash(string: string) {
         // @ts-ignore
         return crypto.createHash('sha256', passwordSalt)
@@ -45,10 +46,10 @@ export class UserController {
             email: loginRequest.email,
             password: UserController.generateHash(loginRequest.password)
         }
-        const users =  await this.userRepository.find(queryParams);
+        const users = await this.userRepository.find(queryParams);
 
-        if (users.length == 0) throw new NotFoundError();
+        if (users.length == 0) throw new ForbiddenError();
 
-        return Authorization.sign({user: users[0]});
+        return {token: Authorization.sign({user: users[0]})};
     }
 }

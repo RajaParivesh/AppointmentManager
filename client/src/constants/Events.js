@@ -1,0 +1,8 @@
+const Events = {
+    LOGIN_INITIATED: "LOGIN_INITIATED",
+    LOGIN_FAILED: "LOGIN_FAILED",
+    LOGIN_SUCCESS: "LOGIN_SUCCESS",
+
+};
+
+export {Events};
