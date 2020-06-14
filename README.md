@@ -1,4 +1,4 @@
-#Appointment Management Application
+# Appointment Management Application
 
 ## Navigus Assignment-2
 Build a Calendar Slot Booking service, similar to that of Calendly(https://calendly.com/) , which 
@@ -24,7 +24,7 @@ that each slot is a fixed hourly slot. For example, 12:00-13:00, 13:00-14:00, et
 1. **Live App:**  http://appointment.lcvk.org/ 
 2. **GitHub:**  https://github.com/RajaParivesh/AppointmentManager
 
-####Step to setup and run the project:
+#### Step to setup and run the project:
 1. Clone the project
 2. Install yarn or npm in your system
 3. In the project root directory run the command (for backend server),  
