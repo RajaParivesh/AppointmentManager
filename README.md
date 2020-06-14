@@ -47,6 +47,6 @@ that each slot is a fixed hourly slot. For example, 12:00-13:00, 13:00-14:00, et
 
 * The View or the V component of the design is separated from the main app and written in React.js to have maximum flexibility. 
 
-* The interaction between the backend and the view is facilitated through authentication based on JSON Web Token (JWT) 
+* A token based authorization mechanism, JWT, is used to facilitate encrypted message transfer between the client and server
 
 * I have used TypeORM for the model creation and MySQL for storage of data
