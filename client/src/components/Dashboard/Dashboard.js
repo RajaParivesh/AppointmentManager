@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Home() {
+export default function Dashboard() {
 
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
@@ -84,7 +84,7 @@ export default function Home() {
             <CssBaseline />
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">
-                    Welcome to the Event Management Website
+                    Welcome to the DashBoard
                 </Typography>
                 <br/>
                 {/*----------------*/}
@@ -94,7 +94,7 @@ export default function Home() {
                             <Card className={classes.root} variant="outlined">
                                 <CardContent>
                                     <Typography variant="h5" component="h2">
-                                       Quotes:
+                                        Quotes:
                                     </Typography>
                                     <br/>
                                     <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -108,8 +108,8 @@ export default function Home() {
                         </Grid>
 
 
-                        <Grid item md={12} md={6}>
-                            <Link to="/login">
+                        <Grid item md={12} md={4}>
+                            <Link to="/availability">
                                 <Button
                                     type="submit"
                                     fullWidth
@@ -117,29 +117,36 @@ export default function Home() {
                                     color="primary"
                                     className={classes.submit}
                                 >
-                                    Login
+                                    My Availability
                                 </Button>
                             </Link>
                         </Grid>
-                        <Grid item md={12} md={6}>
-                            <Link to="/register">
+                        <Grid item md={12} md={4}>
+                            <Link to="/book-others-time">
                                 <Button
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    color="secondary"
+                                    color="primary"
                                     className={classes.submit}
                                 >
-                                    Register
+                                    Book Others Time
                                 </Button>
                             </Link>
-
-
-                            {/*<Link to="/signup" className="btn btn-primary">Sign up</Link>*/}
-
-
-
-                        </Grid>
+                         </Grid>
+                         <Grid item md={12} md={4}>
+                            <Link to="/my-booked-slot">
+                                <Button
+                                    type="submit"
+                                    fullWidth
+                                    variant="contained"
+                                    color="primary"
+                                    className={classes.submit}
+                                >
+                                    My Booked Slot
+                                </Button>
+                            </Link>
+                         </Grid>
                     </Grid>
 
                 </form>
