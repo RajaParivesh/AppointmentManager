@@ -13,9 +13,7 @@ const initiateLoginLogic = createLogic({
             method: "POST",
             data: action.payload,
         }
-
         console.debug('Fetching data for widget with body: ', body);
-
         request(body)
             .then((response) => {
                 console.debug('Login data success: ', response);
@@ -28,7 +26,7 @@ const initiateLoginLogic = createLogic({
                 console.debug('Login data failure: ', err);
                 dispatch({
                     type: Events.LOGIN_FAILED,
-                    payload: "Something went wrong!",
+                    payload: err.error,
                 });
             })
             .finally(() => done());

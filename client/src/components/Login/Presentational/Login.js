@@ -13,10 +13,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import login from "../../../logics/login";
-import Dashboard from "../../Dashboard/Dashboard";
 import {Redirect} from "react-router-dom";
-// import Copyright from "../../Copyright/Copyright;
+import Copyright from "../../Copyright/Copyright";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -51,6 +49,16 @@ export default class Login extends Component {
 
     onPasswordChange = (event) => {
         this.setState({password: event.target.value});
+    }
+
+    renderErrorBlock = () => {
+        if(this.props.user.error) {
+            return (
+                <Box mt={8} style={{"background":"red"}}>
+                    {this.props.user.error}
+                </Box>
+            );
+        }
     }
 
     render() {
@@ -124,8 +132,11 @@ export default class Login extends Component {
                     </Grid>
                 </form>
             </div>
+
+            {this.renderErrorBlock()}
+
             <Box mt={8}>
-                {/*<Copyright />*/}
+                <Copyright />
             </Box>
         </Container>);
     }

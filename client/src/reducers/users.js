@@ -25,7 +25,7 @@ export default (state = initialState, action) => {
                 email: null,
                 firstName:null,
                 lastName: null,
-                error: payload,
+                error: payload || "Something went wrong",
             };
         default:
             return state;
