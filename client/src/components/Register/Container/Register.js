@@ -1,15 +1,12 @@
 import { connect } from 'react-redux';
 import {Events} from "../../../constants/Events";
-import Login from "../Presentation/Login";
+import Register from "../Presentation/Register";
+import request from "../../../utils/requests";
 
-const mapStateToProps = (state) => {
-    return ({
-        user: state.user,
-    });
-};
+const mapStateToProps = () => {};
 
 const mapDispatchToProps = dispatch => ({
-    initiateLogin: (payload) => {
+    register: (payload) => {
         console.log("sending payload", payload)
         dispatch({
             type: Events.LOGIN_INITIATED,
@@ -21,4 +18,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Login);
+)(Register);
