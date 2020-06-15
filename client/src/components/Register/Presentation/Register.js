@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Copyright from "../../Copyright/Copyright";
-import {Link, Redirect} from "react-router-dom";
+import {Link} from "react-router-dom";
 import {withStyles} from "@material-ui/core/styles";
 import ErrorBlock from "../../ErrorBlock";
 
@@ -39,25 +39,42 @@ class Register extends Component {
         email: "",
         password: "",
         error: "",
-        success: false
+        success: false,
+        disabled:  false
     }
 
     handleChange = () => {
+
+        this.setState({disabled: true});
+
         this.props.register(this.state)
-            .then(() => {
+            .then((response) => {
                 this.setState({success: true})
+                console.debug("User Registration Successful", this.state);
             }).catch((err) => {
-                this.setState({error: err.error || "Some error occurred while registering"})
-            });
+            console.debug("Error registering user", err);
+            this.setState({error: err.error || "Some error occurred while registering", disabled:false})
+        });
+    }
+    renderConfirmation = () => {
+        if (!this.state.success) return;
+        return (
+            <Fragment>
+                <p>You have been successfully registered</p>
+                <Link to="/login">Login Here to continue</Link>;
+            </Fragment>
+        )
     }
 
-    render() {
-        const {classes, success} = this.props;
 
-        if (success) return <Redirect to="/login"/>;
+    render() {
+        const {classes} = this.props;
 
         return (
             <Container component="main" maxWidth="xs">
+
+
+
                 <CssBaseline/>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
@@ -66,6 +83,9 @@ class Register extends Component {
                     <Typography component="h1" variant="h5">
                         Register
                     </Typography>
+
+                    {this.renderConfirmation()}
+
                     <form className={classes.form} noValidate>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
@@ -131,6 +151,7 @@ class Register extends Component {
                             color="primary"
                             className={classes.submit}
                             onClick={this.handleChange}
+                            disabled={this.state.disabled}
                         >
                             Register Now
                         </Button>
@@ -143,7 +164,7 @@ class Register extends Component {
                         </Grid>
                     </form>
                 </div>
-                <ErrorBlock error={this.state.error} />
+                <ErrorBlock error={this.state.error}/>
                 <Box mt={5}>
                     <Copyright/>
                 </Box>
