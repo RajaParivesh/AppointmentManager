@@ -1,17 +1,17 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles, withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from "../../Copyright/Copyright";
 import AppointmentCard from "../../Appointment/AppointmentCard";
 import AppointmentModal from "../../Appointment/AppointmentModal";
 import {Redirect} from "react-router-dom";
 
-const useStyles = makeStyles((theme) => ({
+const styles = theme => ({
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -29,66 +29,72 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(3, 0, 2),
     },
-}));
+});
 
-export default function Availability(props) {
-    const [open, setOpen] = React.useState(false);
+class Availability extends Component {
+    state = {
+        modalState: false
+    }
 
-    const handleClickOpen = () => setOpen(true);
+    handleClickOpen = () => this.setState({modalState: true});
 
-    const handleClose = () => setOpen(false);
+    handleClose = () => this.setState({modalState: false});
 
-    const addAvailability = (payload) => {
-        return props.addAvailability(payload, props.user.token)
+    addAvailability = (payload) => {
+        return this.props.addAvailability(payload, this.props.user.token)
             .then(() => {
-                handleClose();
+                this.handleClose();
             }).catch((err) => {
                 console.debug("Some error occurred while adding slot", err);
-                handleClose();
+                this.handleClose();
             })
     }
 
-    const classes = useStyles();
+    render() {
+        const {classes, user: {token}} = this.props;
+        if (!token) return <Redirect to='/login'/>;
 
-    if (!props.user.token) return <Redirect to='/login' />;
-
-    return (
-        <Container component="main" maxWidth="sm">
-            <CssBaseline/>
-            <div className={classes.paper}>
-                <Typography component="h1" variant="h5">
-                    My Tracked Availabilities
-                </Typography>
-                <br/>
-                <Grid container spacing={2}>
-                    <AppointmentCard owner="true"/>
-                    <AppointmentCard owner="true"/>
-                    <AppointmentCard owner="true"/>
-                    <Grid item md={12}>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                            onClick={handleClickOpen}
-                        >
-                            Add Availability
-                        </Button>
+        return (
+            <Container component="main" maxWidth="sm">
+                <CssBaseline/>
+                <div className={classes.paper}>
+                    <Typography component="h1" variant="h5">
+                        My Tracked Availabilities
+                    </Typography>
+                    <br/>
+                    <Grid container spacing={2}>
+                        <AppointmentCard owner="true"/>
+                        <AppointmentCard owner="true"/>
+                        <AppointmentCard owner="true"/>
+                        <Grid item md={12}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                color="primary"
+                                className={classes.submit}
+                                onClick={this.handleClickOpen}
+                            >
+                                Add Availability
+                            </Button>
+                        </Grid>
                     </Grid>
-                </Grid>
 
-            </div>
-            <Box mt={5}>
-                <Copyright/>
-            </Box>
-            <AppointmentModal
-                open={open}
-                handleClose={handleClose}
-                handleChange={addAvailability}
-                title={"Add Availability"}
-                slot={null}
-            />
-        </Container>
-    );
+                </div>
+                <Box mt={5}>
+                    <Copyright/>
+                </Box>
+                <AppointmentModal
+                    open={this.state.modalState}
+                    handleClose={this.handleClose}
+                    handleChange={this.addAvailability}
+                    title={"Add Availability"}
+                    slot={null}
+                />
+            </Container>
+        );
+    }
+
 }
+
+export default withStyles(styles, {withTheme: true})(Availability);
