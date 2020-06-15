@@ -12,6 +12,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Grid from "@material-ui/core/Grid";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import AppointmentModal from "./AppointmentModal";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -57,7 +58,6 @@ export default function ({slot, owner, callback}) {
             <Card className={classes.root} variant="outlined">
                 <CardContent>
                     {!owner ? <div> <b>User:</b> "rajaparivesh@gmail.com"</div> : "" }
-
                     <Grid container spacing={2} >
                         <Grid item md={6}>
                             <b>Start: </b> 24/05/2020 12:45
@@ -66,58 +66,12 @@ export default function ({slot, owner, callback}) {
                             <b>End: </b> 25/05/2020 12:45
                         </Grid>
                     </Grid>
-
                 </CardContent>
 
                 {cardActions()}
 
-                <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                    <DialogTitle id="form-dialog-title">Add Slot</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText>
-                            To Add your slot, please enter your details here. occasionally.
-                        </DialogContentText>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Email Address"
-                            type="email"
-                            fullWidth
-                        />
-                        <TextField
-                            id="datetime-local"
-                            label="Start data time"
-                            type="datetime-local"
-                            defaultValue="2017-05-24T10:30"
-                            fullWidth
-                            className={classes.textField}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                        <TextField
-                            id="datetime-local"
-                            label="End data time"
-                            type="datetime-local"
-                            defaultValue="2017-05-24T10:30"
-                            fullWidth
-                            className={classes.textField}
-                            InputLabelProps={{
-                                shrink: true,
-                            }}
-                        />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button onClick={handleClose} color="primary">
-                            Cancel
-                        </Button>
-                        <Button onClick={handleClose} color="primary">
-                            Add
-                        </Button>
-                    </DialogActions>
-                </Dialog>
             </Card>
+            <AppointmentModal open={open} handleClose={handleClose} title={"Update Availability"} slot={slot}/>
         </Grid>
     );
 }

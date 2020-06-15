@@ -7,7 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from "../Copyright/Copyright";
-import AppointmentCard from "../AppointmentCard/AppointmentCard";
+import AppointmentCard from "../Appointment/AppointmentCard";
+import AppointmentModal from "../Appointment/AppointmentModal";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,6 +31,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Availability() {
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => setOpen(true);
+
+    const handleClose = () => setOpen(false);
+
     const classes = useStyles();
     return (
         <Container component="main" maxWidth="sm" >
@@ -50,6 +57,7 @@ export default function Availability() {
                             variant="contained"
                             color="primary"
                             className={classes.submit}
+                            onClick={handleClickOpen}
                         >
                             Add Availability
                         </Button>
@@ -60,6 +68,7 @@ export default function Availability() {
             <Box mt={5}>
                 <Copyright />
             </Box>
+            <AppointmentModal open={open} handleClose={handleClose} title={"Add Availability"} slot={null}/>
         </Container>
     );
 }
