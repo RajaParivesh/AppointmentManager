@@ -23,6 +23,18 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         return request(body);
     },
 
+    removeAvailability: (id, token) =>{
+        const body = {
+            url: `${AppConstant.BASE_URL}/slots/${id}`,
+            method: "DELETE",
+            headers: {
+                "authorization": token,
+            }
+        }
+        console.debug('Trying to delete the slot : ');
+        return request(body);
+    },
+
     getAvailableSlots: (token) => {
         const body = {
             url: `${AppConstant.BASE_URL}/slots`,

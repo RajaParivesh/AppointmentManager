@@ -62,8 +62,19 @@ class Availability extends Component {
                 this.handleClose();
             })
     }
+    removeSlotAvailability =  (id) => {
+        return this.props.removeAvailability(id,this.props.user.token)
+            .then((response) =>{
+                this.setState(prev =>({
+                    slots: prev.slots.filter(e => e.id !== id)
+                }));
+            })
+            .catch((err) => {
+                console.debug("Not able to remove the slot", err);
+            })
+    }
 
-    render() {
+    render(){
         const {classes, user: {token}} = this.props;
         if (!token) return <Redirect to='/login'/>;
 
@@ -77,7 +88,14 @@ class Availability extends Component {
                     <br/>
                     <Grid container spacing={2}>
 
-                        {this.state.slots.map(s => <AppointmentCard owner="true" slot={s} key={Math.random()}/>)}
+                        {this.state.slots.map(s => <AppointmentCard
+                            owner="true"
+                            slot={s}
+                            key={Math.random()}
+                            removeAvailability = {this.removeSlotAvailability}
+                            />
+                            )
+                        }
 
                         <Grid item md={12}>
                             <Button

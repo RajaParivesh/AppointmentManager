@@ -29,12 +29,16 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function ({slot, owner, callback}) {
+export default function ({slot, owner, removeAvailability}) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => setOpen(true);
 
     const handleClose = () => setOpen(false);
+
+    const handleRemove = () => {
+        return removeAvailability(slot.id);
+    }
 
     const cardActions = () => {
         // Depending on the type of owner actions can change
@@ -42,7 +46,7 @@ export default function ({slot, owner, callback}) {
             <CardActions>
                 &nbsp;&nbsp;<b>Status: &nbsp; &nbsp;</b> {AppConstant.STATUS_MAP[slot.statusId]} &nbsp; &nbsp;
                 {owner ? <Button color="primary" onClick={handleClickOpen} size="small">Update</Button> : ""}
-                {owner ? <Button color="secondary" onClick={handleClickOpen} size="small">Remove</Button>: ""}
+                {owner ? <Button color="secondary" onClick={handleRemove} size="small">Remove</Button>: ""}
                 {!owner ?<Button color="primary" onClick={handleClickOpen} size="small">Book</Button>:""}
             </CardActions>
         );
