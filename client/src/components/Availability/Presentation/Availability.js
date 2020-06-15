@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import {makeStyles, withStyles} from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Copyright from "../../Copyright/Copyright";
 import AppointmentCard from "../../Appointment/AppointmentCard";
@@ -33,7 +33,15 @@ const styles = theme => ({
 
 class Availability extends Component {
     state = {
-        modalState: false
+        modalState: false,
+        slots: []
+    }
+
+    componentDidMount() {
+        this.props.getAvailableSlots(this.props.user.token).then((response) => {
+            console.log(response.data);
+            this.setState({slots: response.data});
+        });
     }
 
     handleClickOpen = () => this.setState({modalState: true});
@@ -42,7 +50,12 @@ class Availability extends Component {
 
     addAvailability = (payload) => {
         return this.props.addAvailability(payload, this.props.user.token)
-            .then(() => {
+            .then((response) => {
+
+                this.setState(prev => ({
+                    slots: [...prev.slots, response.data]
+                }));
+
                 this.handleClose();
             }).catch((err) => {
                 console.debug("Some error occurred while adding slot", err);
@@ -63,9 +76,9 @@ class Availability extends Component {
                     </Typography>
                     <br/>
                     <Grid container spacing={2}>
-                        <AppointmentCard owner="true"/>
-                        <AppointmentCard owner="true"/>
-                        <AppointmentCard owner="true"/>
+
+                        {this.state.slots.map(s => <AppointmentCard owner="true" slot={s} key={Math.random()}/>)}
+
                         <Grid item md={12}>
                             <Button
                                 type="submit"

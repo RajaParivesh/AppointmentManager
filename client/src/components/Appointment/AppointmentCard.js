@@ -1,18 +1,13 @@
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import TextField from "@material-ui/core/TextField";
-import DialogActions from "@material-ui/core/DialogActions";
 import Grid from "@material-ui/core/Grid";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import AppointmentModal from "./AppointmentModal";
+import * as moment from "moment";
+import AppConstant from "../../constants/AppConstant";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -45,7 +40,7 @@ export default function ({slot, owner, callback}) {
         // Depending on the type of owner actions can change
         return (
             <CardActions>
-                &nbsp;&nbsp;<b>Status: &nbsp; &nbsp;</b>Hello world! &nbsp; &nbsp;
+                &nbsp;&nbsp;<b>Status: &nbsp; &nbsp;</b> {AppConstant.STATUS_MAP[slot.statusId]} &nbsp; &nbsp;
                 {owner ? <Button color="primary" onClick={handleClickOpen} size="small">Update</Button> : ""}
                 {owner ? <Button color="secondary" onClick={handleClickOpen} size="small">Remove</Button>: ""}
                 {!owner ?<Button color="primary" onClick={handleClickOpen} size="small">Book</Button>:""}
@@ -60,10 +55,10 @@ export default function ({slot, owner, callback}) {
                     {!owner ? <div> <b>User:</b> "rajaparivesh@gmail.com"</div> : "" }
                     <Grid container spacing={2} >
                         <Grid item md={6}>
-                            <b>Start: </b> 24/05/2020 12:45
+                            <b>Start: </b> {moment(slot.epochStart * 1000).format("DD/MM/YYYY HH:mm")}
                         </Grid>
                         <Grid item md={6}>
-                            <b>End: </b> 25/05/2020 12:45
+                            <b>End: </b> {moment(slot.epochEnd * 1000).format("DD/MM/YYYY HH:mm")}
                         </Grid>
                     </Grid>
                 </CardContent>

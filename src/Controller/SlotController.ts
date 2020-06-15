@@ -29,11 +29,12 @@ export class SlotController {
     @Post("/slots")
     async post(@EntityFromBody() slots: Slots, @Req() req: any ){
         slots.userId = req.auth.user.id;
+        slots.statusId = 1;
         const slot = await this.slotsRepository.save(slots);
         const slotStatus= {
             userId: slot.userId,
             slotId: slot.id,
-            statusId: 1,
+            statusId: slots.statusId,
             epoch: Math.floor(Date.now()/1000)
         };
         await this.slotStatusRepository.save(slotStatus);
@@ -42,9 +43,9 @@ export class SlotController {
 
     // Get all slots of a given user_id
     @Authorized()
-    @Get("/slots/:userId")
-    getSlots(@Param("userId") userId: number){
-        return this.slotsRepository.find({userId:userId});
+    @Get("/slots")
+    getSlots(@Req() req: any ){
+        return this.slotsRepository.find({userId:req.auth.user.id});
     }
 
     // Modify the slots

@@ -16,6 +16,8 @@ export class Slots {
     @Column()
     userId: number;
 
+    @Column()
+    statusId: number;
 
     @OneToMany(type => SlotStatus, slotStatus => slotStatus.slotId)
     slotStatus: SlotStatus[]

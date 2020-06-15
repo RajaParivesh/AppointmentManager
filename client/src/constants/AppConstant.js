@@ -6,5 +6,10 @@ const getHost = () => {
 }
 
 export default {
-    BASE_URL: `${getHost()}/api`
+    BASE_URL: `${getHost()}/api`,
+    STATUS_MAP: {
+        1: "Available",
+        2: "Booked",
+        3: "Cancelled"
+    }
 };

@@ -12,7 +12,7 @@ export default function ({open, handleClose, title, handleChange, slot}) {
         event.preventDefault();
         const payload = {
             epochStart: moment(event.target.epochStart.value).unix(),
-            epochEnd:moment(event.target.epochStart.value).unix(),
+            epochEnd:moment(event.target.epochEnd.value).unix(),
             id: moment(event.target.id.value).unix(),
             status: event.target.status.value
         }

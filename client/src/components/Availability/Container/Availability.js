@@ -11,8 +11,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     addAvailability: (payload, token) => {
-        console.log(ownProps.user);
-        console.log(payload);
         const body = {
             url: `${AppConstant.BASE_URL}/slots`,
             method: "POST",
@@ -22,6 +20,18 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             }
         }
         console.debug('Trying to add availability with payload: ', body);
+        return request(body);
+    },
+
+    getAvailableSlots: (token) => {
+        const body = {
+            url: `${AppConstant.BASE_URL}/slots`,
+            method: "GET",
+            headers: {
+                "authorization": token,
+            }
+        }
+        console.debug('Trying to get all Slots: ', body);
         return request(body);
     }
 });
