@@ -5,7 +5,7 @@ import {
     JsonController,
     Patch,
     Authorized,
-    Req
+    Req, Delete
 } from "routing-controllers";
 import {Slots} from "../Entity/Slots";
 import {getConnectionManager, Repository} from "typeorm";
@@ -59,6 +59,13 @@ export class SlotController {
         slot.epochEnd = slots.epochEnd;
 
         return this.slotsRepository.save(slot);
+    }
+
+    @Authorized()
+    @Delete("/slots/:id")
+    async deleteSlot(@Param("id")  id: number){
+        await this.slotStatusRepository.delete({slotId:id})
+        return this.slotsRepository.delete({id:id});
     }
 }
 
