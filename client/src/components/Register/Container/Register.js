@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import Register from "../Presentation/Register";
 import {request} from "../../../utils/requests";
 import AppConstant from "../../../constants/AppConstant";
-import {Events} from "../../../constants/Events";
 
 const mapStateToProps = () => {};
 
