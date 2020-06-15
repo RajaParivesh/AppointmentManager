@@ -11,13 +11,13 @@ export class SlotStatus {
     slotId:number;
 
     @Column()
-    status_id: number;
+    statusId: number;
 
     @Column()
-    user_id: number;
+    userId: number;
 
     @Column()
-    timestamp: number;
+    epoch: number;
 
 
     @ManyToOne(type => Slots, slot => slot.id)

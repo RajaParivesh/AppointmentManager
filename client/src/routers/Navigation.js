@@ -7,7 +7,7 @@ import {
 import Home from "../components/Home/Home";
 import {Login} from "../components/Login";
 import {Register} from "../components/Register";
-import Availability from "../components/Availability/Availability";
+import {Availability} from "../components/Availability";
 import BookOthersTime from "../components/BookOthersTime/BookOthersTime";
 import MyBookedSlot from "../components/MyBookedSlot/MyBookedSlot";
 import Dashboard from "../components/Dashboard/Dashboard";

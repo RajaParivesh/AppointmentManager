@@ -8,13 +8,13 @@ export class Slots {
     id: number;
 
     @Column()
-    start_date_time:number;
+    epochStart:number;
 
     @Column()
-    end_date_time: number;
+    epochEnd: number;
 
     @Column()
-    user_id: number;
+    userId: number;
 
 
     @OneToMany(type => SlotStatus, slotStatus => slotStatus.slotId)

@@ -4,11 +4,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Copyright from "../Copyright/Copyright";
-import AppointmentCard from "../Appointment/AppointmentCard";
-import AppointmentModal from "../Appointment/AppointmentModal";
+import Copyright from "../../Copyright/Copyright";
+import AppointmentCard from "../../Appointment/AppointmentCard";
+import AppointmentModal from "../../Appointment/AppointmentModal";
+import {Redirect} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,17 +31,30 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Availability() {
+export default function Availability(props) {
     const [open, setOpen] = React.useState(false);
 
     const handleClickOpen = () => setOpen(true);
 
     const handleClose = () => setOpen(false);
 
+    const addAvailability = (payload) => {
+        return props.addAvailability(payload, props.user.token)
+            .then(() => {
+                handleClose();
+            }).catch((err) => {
+                console.debug("Some error occurred while adding slot", err);
+                handleClose();
+            })
+    }
+
     const classes = useStyles();
+
+    if (!props.user.token) return <Redirect to='/login' />;
+
     return (
-        <Container component="main" maxWidth="sm" >
-            <CssBaseline />
+        <Container component="main" maxWidth="sm">
+            <CssBaseline/>
             <div className={classes.paper}>
                 <Typography component="h1" variant="h5">
                     My Tracked Availabilities
@@ -66,9 +80,15 @@ export default function Availability() {
 
             </div>
             <Box mt={5}>
-                <Copyright />
+                <Copyright/>
             </Box>
-            <AppointmentModal open={open} handleClose={handleClose} title={"Add Availability"} slot={null}/>
+            <AppointmentModal
+                open={open}
+                handleClose={handleClose}
+                handleChange={addAvailability}
+                title={"Add Availability"}
+                slot={null}
+            />
         </Container>
     );
 }
