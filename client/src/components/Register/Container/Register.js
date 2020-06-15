@@ -1,18 +1,22 @@
 import { connect } from 'react-redux';
-import {Events} from "../../../constants/Events";
 import Register from "../Presentation/Register";
-import request from "../../../utils/requests";
+import {request} from "../../../utils/requests";
+import AppConstant from "../../../constants/AppConstant";
+import {Events} from "../../../constants/Events";
 
 const mapStateToProps = () => {};
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = () => ({
     register: (payload) => {
-        console.log("sending payload", payload)
-        dispatch({
-            type: Events.LOGIN_INITIATED,
-            payload: payload
-        });
-    },
+        console.log("sending payload", payload);
+        const body = {
+            url: `${AppConstant.BASE_URL}/users`,
+            method: "POST",
+            data: payload,
+        }
+        console.debug('Trying to register with payload: ', body);
+        return request(body);
+    }
 });
 
 export default connect(

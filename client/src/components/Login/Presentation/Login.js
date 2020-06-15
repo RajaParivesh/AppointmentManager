@@ -14,6 +14,7 @@ import Container from '@material-ui/core/Container';
 import {Link, Redirect} from "react-router-dom";
 import Copyright from "../../Copyright/Copyright";
 import {withStyles} from "@material-ui/core/styles";
+import ErrorBlock from "../../ErrorBlock";
 
 const styles = theme => ({
     paper: {
@@ -48,16 +49,6 @@ class Login extends Component {
 
     onPasswordChange = (event) => {
         this.setState({password: event.target.value});
-    }
-
-    renderErrorBlock = () => {
-        if(this.props.user.error) {
-            return (
-                <Box mt={8} style={{"background":"red"}}>
-                    {this.props.user.error}
-                </Box>
-            );
-        }
     }
 
     render() {
@@ -131,7 +122,7 @@ class Login extends Component {
                 </form>
             </div>
 
-            {this.renderErrorBlock()}
+            <ErrorBlock error={this.props.user.error} />
 
             <Box mt={8}>
                 <Copyright />

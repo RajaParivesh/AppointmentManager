@@ -13,7 +13,7 @@ const initiateLoginLogic = createLogic({
             method: "POST",
             data: action.payload,
         }
-        console.debug('Fetching data for widget with body: ', body);
+        console.debug('Trying to login with payload: ', body);
         request(body)
             .then((response) => {
                 console.debug('Login data success: ', response);
